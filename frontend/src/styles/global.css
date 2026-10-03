@@ -35,3 +35,15 @@ body { margin: 0; background: #f6f8fb; color: #1f2937; }
 .error-text { color: #b42318; }
 .status-legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 0 0 10px; font-size: 12px; color: var(--muted); }
 .legend-item { background: #eef2f7; border-radius: 999px; padding: 2px 10px; }
+.drill-panel { background: #fff; border: 1px solid var(--border); border-radius: 8px; padding: 12px 14px; margin: 12px 0; }
+.drill-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 8px; }
+.drill-head h3 { margin: 0; font-size: 15px; }
+.drill-block { margin-bottom: 12px; }
+.drill-block h4 { margin: 8px 0 6px; font-size: 13px; color: var(--muted); }
+.shift-panel { margin-top: 16px; }
+.tag { display: inline-block; background: #eef2f7; border-radius: 999px; padding: 2px 10px; font-size: 12px; color: var(--muted); }
+.tag.ok { background: #dcfce7; color: #166534; }
+.tag.warn { background: #fef3c7; color: #92400e; }
+.note-input { border: 1px solid var(--border); border-radius: 6px; padding: 4px 8px; font-size: 12px; }
+.cell-note { font-size: 12px; color: var(--muted); margin-top: 2px; }
+.success-text { color: #15803d; }

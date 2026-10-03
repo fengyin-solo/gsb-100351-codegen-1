@@ -68,4 +68,9 @@ npm run build
 - 字段、状态、动作与流转目标集中在 `frontend/src/data/modules.ts`；示例数据在
   `frontend/src/data/seed.ts`。
 - 状态流转只允许在 `local-service.ts` 里改，页面组件不做业务判断。
+- 首页是汛情值守台：按流域并排统计水位/雨量/流量/地下水的未处理量、异常站次与最近观测时刻，
+  逻辑在 `frontend/src/api/duty-service.ts`。交接班摘要与统计规则版本单独存在
+  `hydrology-monitor-station:duty` 里（不走 entries 缓存，多终端同时提交时先锁定者胜出，
+  后提交者收到冲突提示）；锁定摘要会同步生成巡检待办「观测核查」与站房维护台账关联事项，
+  规则版本升级只重算未锁定班次，已归档班次保留原版本。
 - 想回到初始数据：清掉浏览器里 `hydrology-monitor-station:entries` 这一项，或调用 `resetModule(模块)`。

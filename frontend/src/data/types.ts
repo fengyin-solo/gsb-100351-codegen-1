@@ -32,7 +32,53 @@ export type ActionResult = {
   message: string
 }
 
-export type OverviewResult = {
+export type BasinModuleStat = {
+  moduleKey: string
+  moduleName: string
+  pending: number
+  abnormal: number
+  latest: string
+}
+
+export type BasinStat = {
+  basin: string
+  modules: BasinModuleStat[]
+  pending: number
+  abnormal: number
+}
+
+export type ShiftSlot = {
+  shiftKey: string
+  shiftLabel: string
+  workDate: string
+  current: boolean
+}
+
+export type ShiftSummary = {
+  shiftKey: string
+  shiftLabel: string
+  workDate: string
+  operator: string
+  locked: boolean
+  lockedAt: string
+  ruleVersion: number
+  note: string
+  pending: number
+  abnormal: number
+  snapshot: BasinStat[]
+  linked: { inspectionId: number; stationhouseId: number } | null
+}
+
+export type ShiftBoardRow = {
+  slot: ShiftSlot
+  summary: ShiftSummary | null
+}
+
+export type DutyBoard = {
+  ruleVersion: number
+  ruleName: string
+  ruleDesc: string
   cards: { label: string; value: number }[]
-  modules: { name: string; created: number; pending: number; abnormal: number }[]
+  basins: BasinStat[]
+  shifts: ShiftBoardRow[]
 }
