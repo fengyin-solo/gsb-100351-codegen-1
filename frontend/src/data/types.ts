@@ -31,8 +31,3 @@ export type ActionResult = {
   ok: boolean
   message: string
 }
-
-export type OverviewResult = {
-  cards: { label: string; value: number }[]
-  modules: { name: string; created: number; pending: number; abnormal: number }[]
-}

@@ -61,11 +61,27 @@ npm run build
 | 巡检记录 | `inspection` | 巡检记录 | 记录编号、站点编号、巡检日期 |
 | 测报方案 | `plan` | 测报方案 | 方案编号、方案名称、适用范围 |
 
+## 汛情值守台
+
+首页（`/`）是汛情值守台，不再是简单的指标汇总：
+
+- 按流域并列展示水位、雨量、流量、地下水四类监测的**未处理量、异常站次、最近观测时刻**；
+  站点按「所在河流」归入流域，地下水记录按井点挂靠的监测站归流域，配置在
+  `frontend/src/data/duty.ts`。点击流域行可下钻到该流域的具体监测记录。
+- **交接班摘要**：摘要以「日期 + 班次」为键，同一班次两块终端（两个浏览器标签页）同时提交时
+  只保留先到的版本，后提交者收到冲突提示。摘要由当日值守人确认锁定，确认时会联动生成
+  巡检待办「观测核查」与站房维护台账各一条。
+- **规则版本**：摘要内容按统计规则版本生成；「升级统计规则版本」后只重算未锁定班次，
+  已锁定、已归档的班次继续展示原版本快照。
+- 摘要数据单独存在 `hydrology-monitor-station:duty-summaries`，每次读写都直接走
+  localStorage，保证跨标签页的冲突检测生效。
+
 ## 约定
 
 - 每个模块的页面在 `frontend/src/views/<模块>/index.vue`，页面只负责渲染，读写统一走
-  `frontend/src/api/local-service.ts`。
+  `frontend/src/api/local-service.ts`；值守台逻辑在 `frontend/src/api/duty-service.ts`。
 - 字段、状态、动作与流转目标集中在 `frontend/src/data/modules.ts`；示例数据在
   `frontend/src/data/seed.ts`。
 - 状态流转只允许在 `local-service.ts` 里改，页面组件不做业务判断。
 - 想回到初始数据：清掉浏览器里 `hydrology-monitor-station:entries` 这一项，或调用 `resetModule(模块)`。
+  示例数据整体调整时把 `local-store.ts` 里的 `SEED_VERSION` 加一，老缓存会按模块换种。
